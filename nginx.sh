@@ -1,6 +1,7 @@
 #!/bin/bash
 HOST="127.0.0.1"
 PORT="80"
+NGINX_CONF="/etc/nginx/nginx.conf"
 stub_status=nginx_status
 pidof_addr=`which pidof`
 function check() {
@@ -39,10 +40,10 @@ function worker_processes(){
         worker_processes=`$pidof_addr nginx | wc -w`; echo "$worker_processes - 1" | bc
 }
 function worker_connections(){
-        cat /usr/local/nginx/conf/nginx.conf | grep worker_connections | awk '{print $2}' | sed 's/\;//'
+        cat $NGINX_CONF | grep worker_connections | awk '{print $2}' | sed 's/\;//'
 }
 function max_connections(){
-        worker_processes=`ps ax | grep nginx | grep -v grep | wc -l`;wkr_proce=`echo "$worker_processes - 1" | bc`;wkr_conn=`cat /usr/local/nginx/conf/nginx.conf | grep worker_connections | awk '{print $2}' | sed 's/\;//'`;echo "$wkr_conn*$wkr_proce" | bc
+        worker_processes=`ps ax | grep nginx | grep -v grep | wc -l`;wkr_proce=`echo "$worker_processes - 1" | bc`;wkr_conn=`cat $NGINX_CONF | grep worker_connections | awk '{print $2}' | sed 's/\;//'`;echo "$wkr_conn*$wkr_proce" | bc
 }
 function max_file_descriptors(){
         cat /proc/sys/fs/file-nr | awk '{print $3}'
