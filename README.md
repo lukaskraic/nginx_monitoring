@@ -1,5 +1,5 @@
-## nginx_monitoring
-Zabbix 4 Nginx monitoring by Alireza Zabihi based on Alex Gluck solution on Centos 7.6 .
+# Zabbix nginx monitoring
+Zabbix 4 Nginx monitoring by Alireza Zabihi based on Alex Gluck solution on Linux .
 Tested on zabbix 4.4 
 
 ###### Connection Statistics:
@@ -31,14 +31,17 @@ Tested on zabbix 4.4
 - Nginx service status
 - Worker processes bad configuration
 
-## Installation:
+# Installation:
 
-###### Part 1 (Nginx side):
+## Part 1 (Nginx side):
 **1, Check for with-http_stub_status_module enabled or not**
-```nginx -V 2>&1 | grep -o with-http_stub_status_module ```
+```
+nginx -V 2>&1 | grep -o with-http_stub_status_module 
+```
 output:
+```
 with-http_stub_status_module
-
+```
 **NOTE:**
 if there is not any output you need to configure nginx with --with-http_stub_status_module:
 ```
@@ -66,7 +69,7 @@ server {
 ```systemctl restart nginx```
 
 
-###### Part 2 (Zabbix side):
+## Part 2 (Zabbix side):
 **1, download script file "nginx.sh" and put it in nginx server in /etc/zabbix/** 
 ```
 chmod 775 nginx.sh 
@@ -78,7 +81,7 @@ cp nginx.sh /etc/zabbix/
 yum install bc -y
 ```
 
-###### Part 3 (Zabbix agent side):
+## Part 3 (Zabbix agent side):
 **1, Edit zabbix_agent.conf file on Nginx server and add UserParameter**
 ```
 vi /etc/zabbix/zabbix-agent.conf 
@@ -88,7 +91,7 @@ UserParameter=nginx[*],/etc/zabbix/nginx.sh $1
 **2, Restart zabbix-agent service**
 ```systemctl restart zabbix-agent```
 
-###### Part 4 (Zabbix frontend side):
+## Part 4 (Zabbix frontend side):
 1, Download nginx_template.xml template and import it to your zabbix server from ---> Configuration -> Templates -> Import
 2, Link imported template to your Nginx host
 
