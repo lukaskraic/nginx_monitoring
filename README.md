@@ -5,14 +5,14 @@ Tested on zabbix 4.4
 
 ###### Connection Statistics:
 - Active per second
-- Reading per second
+- Reading
 - Waiting per second
-- Writing per second
+- Writing
 - Requests pro connection
 
 ###### Request Statistics:
-- Accepted
-- Handled
+- Accepted per second
+- Handled per second
 - Total
 
 ###### Linux and Nginx performance monitoring:
@@ -24,9 +24,10 @@ Tested on zabbix 4.4
 - Nginx service status
 
 ###### Graph and screen:
-- 'Requests Statistics' graph
-- 'Connection Status' graph
-- File descriptors
+- Requests Statistics graph
+- File descriptors graph
+- Read/Write Connections graph
+- System Statistics graph
 
 ###### Triggers:
 - Nginx service status
